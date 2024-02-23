@@ -1,0 +1,58 @@
+{% extends "pdfgo/homepage.html" %}
+{% load static %}
+{% block content %}
+
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <title>Create PDF</title>
+</head>
+
+<body>
+    <div class="container mt-5 text-center">
+        <h1>PDF Compressor</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="compresspdf">Select PDF to compress:</label>
+            <input type="file" name="compresspdf" id="compresspdf" accept=".pdf" required>
+            <input type="submit" class="btn btn-primary" value="Compress PDF">
+        </form>
+    </div>
+
+    {% if summary %}
+    <div class="container mt-5">
+        <h3 class="text-center">Compression Summary</h3>
+        <div class="row mt-3">
+            <div class="col-md-6 offset-md-3">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td><strong>Input File:</strong></td>
+                            <td>{{ summary.Input_File }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Initial Size:</strong></td>
+                            <td>{{ summary.Initial_Size }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Output File:</strong></td>
+                            <td>{{ summary.Output_File }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compressed Size:</strong></td>
+                            <td>{{ summary.Compressed_Size }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compression Ratio:</strong></td>
+                            <td>{{ summary.Compression_Ratio }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</body>
+
+{% endblock %}

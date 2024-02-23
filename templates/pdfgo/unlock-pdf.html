@@ -1,0 +1,26 @@
+{% extends "pdfgo/homepage.html" %}
+{% load static %}
+{% block content %}
+
+<div class="card text-center">
+    <div class="card-body">
+        <h5 class="card-title">Unlock PDF</h5>
+        <p class="card-text">An easy-to-use online tool to remove passwords from PDFs.</p>
+        <h1>Unlock PDF</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="unlockpdf">Select Encrypted PDF File:</label>
+            <input type="file" class="card-body" name="unlockpdf" id="unlockpdf" accept=".pdf" required><br>
+            <label for="pdf_password" class="card-body">Enter Password:</label>
+            <input type="password" class="card-body" name="pdf_password" id="pdf_password" style="height: 5px;" required>
+            <button type="submit" class="btn btn-primary">Decrypt PDF</button>
+        </form>
+
+        {% if decrypted_pdf_url %}
+            <p>Click the below button to download the Decrypted PDF file.</p>
+            <a href="{{ decrypted_pdf_url }}" download="decrypted.pdf"><button class="btn btn-primary">Download Decrypted PDF</button></a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

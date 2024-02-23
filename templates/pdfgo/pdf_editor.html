@@ -1,0 +1,58 @@
+{% extends "pdfgo/homepage.html" %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/pdf-lib"></script>
+    <title>PDF Editor</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>PDF Editor</h2>
+
+        {% if temp_pdf_url %}
+            <div class="pdf-container">
+                <iframe src="{{ temp_pdf_url }}" width="100%" height="600"></iframe>
+            </div>
+
+            <!-- Add editing controls here -->
+            <button id="add-text-button">Add Text</button>
+            <textarea id="text-input" placeholder="Enter text to add"></textarea>
+            <button id="save-button">Save PDF</button>
+        {% else %}
+            <p>Select a PDF file to edit or create a new one.</p>
+            <!-- Add file input and submit button for uploading a PDF -->
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="pdf_file" accept=".pdf">
+                <button type="submit">Upload PDF</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <script>
+        const pdfViewer = document.querySelector('iframe');
+        const textInput = document.getElementById('text-input');
+        const addTextButton = document.getElementById('add-text-button');
+        const saveButton = document.getElementById('save-button');
+
+        // Event listener for the "Add Text" button
+        addTextButton.addEventListener('click', () => {
+            const text = textInput.value;
+
+            // Replace the uploaded PDF URL with the edited PDF URL
+            const editedPdfUrl = `/edit-pdf/?text=${encodeURIComponent(text)}`;
+            pdfViewer.src = editedPdfUrl;
+        });
+
+        // Event listener for the "Save PDF" button
+        saveButton.addEventListener('click', () => {
+            // Save the edited PDF (you can handle this on the server)
+            console.log("Saving edited PDF...");
+        });
+    </script>
+</body>
+
+{% endblock content %}

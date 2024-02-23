@@ -1,0 +1,28 @@
+{% extends "pdfgo/homepage.html" %}
+{% load static %}
+{% block content %}
+
+
+<head>
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> -->
+
+    <title>Edit PDF</title>
+</head>
+<body>
+    <div class="container mt-5 text-center">
+        <h1>Edit PDF</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            
+            <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+            <a href="{% url 'pdf-detail' pdf_id %}" class="btn btn-secondary btn-sm">Cancel</a>
+        </form>
+    </div>
+</body>
+
+
+
+{% endblock %}

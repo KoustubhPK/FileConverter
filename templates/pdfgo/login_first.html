@@ -1,0 +1,23 @@
+{% extends "pdfgo/homepage.html" %}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>Create PDF</title>
+</head>
+
+<div class="card text-center">
+    <div class="card-body">
+        <body>
+            <div class="icon success">
+                <i class="bi bi-person-exclamation" style="font-size: 70px; color: rgb(128, 115, 0);"></i>
+            </div>        
+            <h1>To Create PDF,</h1>
+            <p>You need to log in first to create a PDF.</p>
+            <p><a href="{% url 'login' %}" class="btn btn-primary">Login</a></p>
+        </body>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "pdfgo/homepage.html" %}
+{% load static %}
+{% block content %}
+
+<div class="card text-center">
+  <div class="card-body">
+    <h5 class="card-title">JPG to PDF</h5>
+    <p class="card-text">The best online JPG to PDF converter</p>
+    <h1>Image to PDF Converter</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="imageFiles">Select images:</label>
+      <input type="file" class="card-body" name="imageFiles" id="imageFiles" accept="image/*" multiple required>
+      <button type="submit" class="btn btn-primary">Convert Images to PDF</button>
+    </form>
+    
+    <!-- Display the download button if merged PDF is available -->
+    {% if merged_pdf %}
+    <p>Click the below button to download the pdf file</p>
+    <a id="downloadLink" href="{{ merged_pdf }}" download="merged.pdf"><button class="btn btn-primary">Download Merged PDF</button></a>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock content %}
+
+ 
+
+
+
+  <!-- <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form">
+      <label for="imageDir">Enter image directory:</label>
+          <input type="file" name="imageDir" id="imageDir" accept="image/*" required>
+      <button type="submit">Convert Images to PDF</button>
+
+       <button type="submit" id="submit" class="clearfix btn">Upload</button> 
+      <input type="submit" id="submit" class="clearfix btn" value="Send"> 
+    </div>
+  </form> -->

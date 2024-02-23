@@ -1,0 +1,25 @@
+{% extends "pdfgo/homepage.html" %}
+{% load static %}
+{% block content %}
+
+<div class="card text-center">
+    <div class="card-body">
+        <h5 class="card-title">PDF to JPG Converter</h5>
+        <p class="card-text">Convert your PDF to JPG images</p>
+        <h1>PDF to JPG Conversion</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="pdftojpg">Select a PDF file:</label>
+            <input type="file" class="card-body" id="pdftojpg" name="pdftojpg" accept=".pdf" required>
+            <button type="submit" class="btn btn-primary">Convert to JPG</button>
+        </form>
+
+        {% if zip_file_url %}
+        <p>Click the below button to download the converted JPG images as a ZIP archive</p>
+        <a href="{{ zip_file_url }}" download="images.zip"><button class="btn btn-primary">Download ZIP</button></a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock content %}

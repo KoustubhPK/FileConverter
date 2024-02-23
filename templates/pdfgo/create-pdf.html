@@ -1,0 +1,21 @@
+{% extends "pdfgo/homepage.html" %}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>Create PDF</title>
+</head>
+<body>
+    <div class="container mt-5 text-center">
+        <form method="post" enctype="multipart/form-data"> 
+            {% csrf_token %} 
+            {{ form.media }}
+            {{ form.as_p }}
+            <div class="container mt-5 text-center">
+                <input type="submit" class="btn btn-info btn-sm text-center" value="Generate PDF" />
+            </div><br>
+        </form>
+    </div>
+</body>
+
+{% endblock %}

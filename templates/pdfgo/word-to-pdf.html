@@ -1,0 +1,30 @@
+{% extends "pdfgo/homepage.html" %}
+{% load static %}
+{% block content %}
+
+<div class="card text-center">
+    <div class="card-body">
+        <h5 class="card-title">Word to PDF Converter</h5>
+        <p class="card-text">The best online Word to PDF Converter</p>
+        <h1>Word to PDF Conversion</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="pdftowordFiles">Select a Word file:</label>
+            <input type="file" class="card-body" id="wordtopdfFiles" name="wordtopdfFiles" accept=".docx" required>
+            <button type="submit" class="btn btn-primary">Convert to PDF</button>
+        </form>
+
+        {% if error_message %}
+            <p class="text-danger">{{ error_message }}</p>
+        {% endif %}
+
+        {% if pdf_file_path %}
+            <p>Click the below button to download the converted PDF file</p>
+            <a href="{{ pdf_file_path }}" download="{{ original_filename }}.pdf">
+                <button class="btn btn-primary">Download PDF File</button>
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
